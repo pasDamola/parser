@@ -1,5 +1,6 @@
 import nltk
 import sys
+import re
 
 TERMINALS = """
 Adj -> "country" | "dreadful" | "enigmatical" | "little" | "moist" | "red"
@@ -16,6 +17,10 @@ V -> "smiled" | "tell" | "were"
 
 NONTERMINALS = """
 S -> N V
+S -> N V Det N
+S -> N V Det N P N
+S -> N V P Det Adj N Conj N V
+S -> 
 """
 
 grammar = nltk.CFG.fromstring(NONTERMINALS + TERMINALS)
@@ -62,7 +67,12 @@ def preprocess(sentence):
     and removing any word that does not contain at least one alphabetic
     character.
     """
-    raise NotImplementedError
+    regex = re.compile('[^a-zA-Z]')
+    new_sentence = regex.sub(' ', sentence)
+    new_sentence = new_sentence.lower()
+    sentence_list = nltk.word_tokenize(new_sentence)
+    print(sentence_list) 
+   
 
 
 def np_chunk(tree):
@@ -72,7 +82,7 @@ def np_chunk(tree):
     whose label is "NP" that does not itself contain any other
     noun phrases as subtrees.
     """
-    raise NotImplementedError
+    return "game"
 
 
 if __name__ == "__main__":
