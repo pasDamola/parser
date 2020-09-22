@@ -20,7 +20,9 @@ S -> N V
 S -> N V Det N
 S -> N V Det N P N
 S -> N V P Det Adj N Conj N V
-S -> 
+S -> Det N V Det Adj N
+S -> N V P Det Adj N
+S -> N V P Det N
 """
 
 grammar = nltk.CFG.fromstring(NONTERMINALS + TERMINALS)
@@ -71,7 +73,7 @@ def preprocess(sentence):
     new_sentence = regex.sub(' ', sentence)
     new_sentence = new_sentence.lower()
     sentence_list = nltk.word_tokenize(new_sentence)
-    print(sentence_list) 
+    return sentence_list 
    
 
 
@@ -82,7 +84,7 @@ def np_chunk(tree):
     whose label is "NP" that does not itself contain any other
     noun phrases as subtrees.
     """
-    return "game"
+    return []
 
 
 if __name__ == "__main__":
