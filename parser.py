@@ -74,8 +74,7 @@ def preprocess(sentence):
     """
     regex = re.compile('[^a-zA-Z]')
     new_sentence = regex.sub(' ', sentence)
-    new_sentence = new_sentence.lower()
-    sentence_list = nltk.word_tokenize(new_sentence)
+    sentence_list = nltk.word_tokenize(new_sentence.lower())
     return sentence_list 
    
 
@@ -89,7 +88,7 @@ def np_chunk(tree):
     """
     np_chunks_list = []
     for s in tree.subtrees(lambda t: t.label() == 'NP'):
-         np_chunks_list.append(s)
+        np_chunks_list.append(s)
     return np_chunks_list
 
 
